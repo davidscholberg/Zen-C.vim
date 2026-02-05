@@ -83,10 +83,16 @@ syn keyword zencDecoratorName contained transparent
 syn keyword zencType
     \ bool
     \ byte
+    \ c_char c_uchar
+    \ c_short c_ushort
+    \ c_int c_unit
+    \ c_long c_ulong
     \ char
     \ double
+    \ F32 F64
     \ f32 f64
     \ float
+    \ I8 I16 I32 I64 I128
     \ i8 i16 i32 i64 i128
     \ int
     \ int8_t int16_t int32_t int64_t
@@ -103,6 +109,8 @@ syn keyword zencType
     \ signed
     \ size_t
     \ string
+    \ U0
+    \ U8 U16 U32 U64 U128
     \ u0
     \ u8 u16 u32 u64 u128
     \ uint
@@ -125,7 +133,14 @@ syn match zencDelimiter /\v(;|:|\(|\)|,|\{|\}|->)/
 
 syn region zencString oneline start=/"/ skip=/\\"/ end=/"/
 
-syn match zencNumber /\v-?(\d+|\d*\.?\d+)/
+" int and float literals (including scientific notation)
+syn match zencNumber /\v-?(\d+|\d+\.?\d+)([Ee]-?\d+)?/
+
+" hex literal
+syn match zencNumber /\v0[Xx][0-9A-Fa-f]+/
+
+" binary literal
+syn match zencNumber /\v0[Bb][01]+/
 
 syn match zencIdentifier /\v[A-Za-z_]\w*/
 
