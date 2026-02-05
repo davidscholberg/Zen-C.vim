@@ -31,6 +31,7 @@ syn keyword zencKeyword
     \ impl
     \ import
     \ in
+    \ include
     \ let
     \ loop
     \ match
@@ -38,6 +39,7 @@ syn keyword zencKeyword
     \ plugin
     \ print
     \ println
+    \ raw
     \ ref
     \ return
     \ struct
@@ -133,6 +135,8 @@ syn match zencDecorator contains=zencDecoratorName /\v\@\w+/
 
 syn match zencEllipsis /\v\.\.\./
 
+syn region zencMacro start=/\v^\s*#/ skip=/\\$/ end=/$/
+
 syn match zencComment /\v\/\/.*/
 
 hi def link zencComment Comment
@@ -147,6 +151,7 @@ hi def link zencNumber Number
 hi def link zencOperator Operator
 hi def link zencDelimiter Delimiter
 hi def link zencEllipsis Special
+hi def link zencMacro Constant
 
 let b:current_syntax = "zenc"
 
