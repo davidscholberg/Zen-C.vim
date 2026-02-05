@@ -142,6 +142,10 @@ syn match zencNumber /\v0[Xx][0-9A-Fa-f]+/
 " binary literal
 syn match zencNumber /\v0[Bb][01]+/
 
+" This match exists solely to prevent identifiers with numbers in them from
+" being highlighted as numbers. This syntax group is intentionally not linked
+" with Identifier in order to more closely match the syntax highlighting
+" provided for other languages.
 syn match zencIdentifier /\v[A-Za-z_]\w*/
 
 syn match zencFunctionName /\v[A-Za-z_]\w*\ze\(/
@@ -160,7 +164,6 @@ hi def link zencDecorator Statement
 hi def link zencType Type
 hi def link zencConstant Constant
 hi def link zencString String
-hi def link zencIdentifier Identifier
 hi def link zencFunctionName Function
 hi def link zencNumber Number
 hi def link zencOperator Operator
