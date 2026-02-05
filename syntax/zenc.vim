@@ -31,7 +31,6 @@ syn keyword zencKeyword
     \ impl
     \ import
     \ in
-    \ include
     \ let
     \ loop
     \ match
@@ -133,6 +132,10 @@ syn match zencDelimiter /\v(;|:|\(|\)|,|\{|\}|->)/
 
 syn region zencString oneline start=/"/ skip=/\\"/ end=/"/
 
+syn region zencContainedString contained oneline start=/"/ skip=/\\"/ end=/"/
+
+syn region zencAngleString contained oneline start=/</ end=/>/
+
 " int and float literals (including scientific notation)
 syn match zencNumber /\v-?(\d+|\d+\.?\d+)([Ee]-?\d+)?/
 
@@ -154,22 +157,31 @@ syn match zencDecorator contains=zencDecoratorName /\v\@\w+/
 
 syn match zencEllipsis /\v\.\.\./
 
-syn region zencMacro start=/\v^\s*#/ skip=/\\$/ end=/$/
+syn region zencMacro contains=zencContainedString start=/\v^\s*#/ skip=/\\$/ end=/$/
+
+" Special coloring for filename strings in include macros
+syn match zencMacro contains=zencContainedString,zencAngleString /\v^\s*#\s*include\s+[<"].+[>"]/
+
+" Special coloring for filename strings in include statments
+syn match zencKeyword contains=zencContainedString,zencAngleString /\v^\s*include\s+[<"].+[>"]/
 
 syn match zencComment /\v\/\/.*/
 
-hi def link zencComment Comment
 hi def link zencKeyword Statement
-hi def link zencDecorator Statement
 hi def link zencType Type
 hi def link zencConstant Constant
-hi def link zencString String
-hi def link zencFunctionName Function
-hi def link zencNumber Number
 hi def link zencOperator Operator
 hi def link zencDelimiter Delimiter
+hi def link zencString String
+hi def link zencContainedString String
+hi def link zencAngleString String
+hi def link zencNumber Number
+hi def link zencFunctionName Function
+hi def link zencDecorator Statement
 hi def link zencEllipsis Special
 hi def link zencMacro Constant
+hi def link zencInclude Statement
+hi def link zencComment Comment
 
 let b:current_syntax = "zenc"
 
