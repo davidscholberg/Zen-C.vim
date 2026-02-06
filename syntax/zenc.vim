@@ -50,36 +50,49 @@ syn keyword zencKeyword
     \ volatile
     \ while
 
-syn keyword zencDecoratorName contained transparent
-    \ align
-    \ cold
-    \ comptime
-    \ constructor
-    \ ctype
-    \ deprecated
-    \ derive
-    \ destructor
-    \ device
-    \ export
-    \ global
-    \ host
-    \ hot
+" These are keywords in C but not Zen C. They are included here to provide
+" better highlighting in `raw` blocks.
+syn keyword zencKeyword
+    \ _Alignas
+    \ _Alignof
+    \ _Atomic
+    \ _BitInt
+    \ _Generic
+    \ _Noreturn
+    \ _Static_assert
+    \ _Thread_local
+    \ alignas
+    \ alignof
+    \ auto
+    \ case
+    \ constexpr
+    \ default
+    \ do
+    \ goto
     \ inline
-    \ must_use
-    \ noinline
-    \ noreturn
-    \ packed
-    \ pure
-    \ section
-    \ unused
-    \ weak
+    \ register
+    \ restrict
+    \ static
+    \ static_assert
+    \ switch
+    \ thread_local
+    \ typedef
+    \ typeof
+    \ typeof_unequal
 
-" Currently, only built-in types will be highlighted.
+" Currently, only built-in types will be highlighted (including built-in C
+" types).
 " If we wanted to properly support highlighting of custom types in all
 " contexts in which they occur, that would complicate this plugin quite a bit.
 " That functionality is more within the purview of a proper parser like
 " Treesitter.
 syn keyword zencType
+    \ _Bool
+    \ _Complex
+    \ _Decimal128
+    \ _Decimal32
+    \ _Decimal64
+    \ _Imaginary
     \ bool
     \ byte
     \ c_char c_uchar
@@ -123,8 +136,34 @@ syn keyword zencType
     \ void
 
 syn keyword zencConstant
-    \ true
+    \ NULL
     \ false
+    \ nullptr
+    \ true
+
+syn keyword zencDecoratorName contained transparent
+    \ align
+    \ cold
+    \ comptime
+    \ constructor
+    \ ctype
+    \ deprecated
+    \ derive
+    \ destructor
+    \ device
+    \ export
+    \ global
+    \ host
+    \ hot
+    \ inline
+    \ must_use
+    \ noinline
+    \ noreturn
+    \ packed
+    \ pure
+    \ section
+    \ unused
+    \ weak
 
 syn match zencOperator /\v(\=|\.|\+|-|\*|\/|\%|\=\=|!=|<|>|<=|>=|&|\||\^|!|\~|\[|\])/
 
