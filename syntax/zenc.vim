@@ -167,6 +167,8 @@ syn keyword zencDecoratorName contained transparent
 
 syn match zencOperator /\v(\=|\.|\+|-|\*|\/|\%|\=\=|!\=|\<|\>|\<\=|\>\=|\&|\||\^|!|\~|\[|\])/
 
+syn match zencGenericOperator contained /\v\*/
+
 syn match zencDelimiter /\v(;|:|\(|\)|,|\{|\}|-\>)/
 
 syn match zencGenericDelimiter contained /\v[\<,\>]/
@@ -176,7 +178,12 @@ syn match zencGenericDelimiter contained /\v[\<,\>]/
 " For now, generic type specifier regions are limited to one line (multiline
 " may get a bit complicated due to clashes with the greater than and less than
 " operators).
-syn region zencGenericTypeSpec oneline keepend contains=zencType,zencGenericDelimiter,zencGenericTypeSpec start=/\v\<\s*/ end=/\v\s*\>/
+syn region zencGenericTypeSpec
+    \ oneline
+    \ keepend
+    \ contains=zencType,zencGenericOperator,zencGenericDelimiter,zencGenericTypeSpec
+    \ start=/\v\<\s*/
+    \ end=/\v\s*\>/
 
 syn region zencString oneline start=/"/ skip=/\\"/ end=/"/
 
@@ -200,7 +207,7 @@ syn match zencNumber /\v0[Bb][01]+/
 syn match zencIdentifier /\v[A-Za-z_]\w*/
 
 " This will highlight both generic and non generic function names.
-syn match zencFunctionName /\v[A-Za-z_]\w*\ze(\<[0-9A-Za-z_, \t\<\>]+\>)?\(/
+syn match zencFunctionName /\v[A-Za-z_]\w*\ze(\<[0-9A-Za-z_, \t\<\>\*]+\>)?\(/
 
 syn match zencDecorator contains=zencDecoratorName /\v\@\w+/
 
@@ -220,6 +227,7 @@ hi def link zencKeyword Statement
 hi def link zencType Type
 hi def link zencConstant Constant
 hi def link zencOperator Operator
+hi def link zencGenericOperator Operator
 hi def link zencDelimiter Delimiter
 hi def link zencGenericDelimiter Delimiter
 hi def link zencString String
