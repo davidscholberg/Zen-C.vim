@@ -31,6 +31,7 @@ syn keyword zencKeyword
     \ impl
     \ import
     \ in
+    \ launch
     \ let
     \ loop
     \ match
@@ -49,6 +50,7 @@ syn keyword zencKeyword
     \ use
     \ volatile
     \ while
+    \ with
 
 " These are keywords in C but not Zen C. They are included here to provide
 " better highlighting in `raw` blocks.
