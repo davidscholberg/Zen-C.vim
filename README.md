@@ -2,7 +2,7 @@
 
 This is a syntax highlighting plugin for the [Zen C](https://github.com/z-libs/Zen-C) programming language, supporting [Vim](https://www.vim.org/) and [Neovim](https://neovim.io/).
 
-NOTE: This plugin is a work in progress, and while it is usable, it is still rough around the edges. Please open an issue for any broken syntax highlighting you encounter.
+NOTE: This plugin should work fine for most Zen C code that you'll write/encounter, but there may still be unhandled edge cases. Please open an issue for any broken syntax highlighting you encounter.
 
 ### Installation
 
@@ -26,4 +26,21 @@ Neovim:
 ```bash
 # Replace "manual" with whatever namespace you prefer:
 git clone https://github.com/davidscholberg/Zen-C.vim.git ~/.local/share/nvim/site/pack/manual/start/Zen-C.vim
+```
+
+### Configuration
+
+In addition to syntax highlighting, this plugin sets a few convenience options related to comment editing/formatting. To ensure these options are loaded, make sure the following options are set in your config (some or all of these may be enabled by default, but it won't hurt to explicitly enable them regardless).
+
+Vim:
+
+```vim
+filetype indent plugin on
+packadd comment
+```
+
+Neovim:
+
+```lua
+vim.cmd("filetype indent plugin on")
 ```

@@ -223,7 +223,11 @@ syn match zencMacro contains=zencContainedString,zencAngleString /\v^\s*#\s*incl
 " Special coloring for filename strings in include statments
 syn match zencKeyword contains=zencContainedString,zencAngleString /\v^\s*include\s+[<"].+[>"]/
 
+" Single-line comments
 syn match zencComment /\v\/\/.*/
+
+" Multi-line comments
+syn region zencComment start=/\v\/\*/ end=/\v\*\//
 
 hi def link zencKeyword Statement
 hi def link zencType Type
