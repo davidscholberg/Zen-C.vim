@@ -167,11 +167,11 @@ syn keyword zencDecoratorName contained transparent
     \ unused
     \ weak
 
-syn match zencOperator /\v(\=|\.|\+|-|\*|\/|\%|\=\=|!\=|\<|\>|\<\=|\>\=|\&|\||\^|!|\~|\[|\])/
+syn match zencOperator /\v(\<\=|\>\=|\=\=|!\=|\=|\.|\+|-|\*|\/|\%|\<|\>|\&|\||\^|!|\~|\[|\])/
 
 syn match zencGenericOperator contained /\v\*/
 
-syn match zencDelimiter /\v(;|:|\(|\)|,|\{|\}|-\>)/
+syn match zencDelimiter /\v(-\>|;|:|\(|\)|,|\{|\})/
 
 syn match zencGenericDelimiter contained /\v[\<,\>]/
 
@@ -193,14 +193,27 @@ syn region zencContainedString contained oneline start=/"/ skip=/\\"/ end=/"/
 
 syn region zencAngleString contained oneline start=/</ end=/>/
 
-" int and float literals (including scientific notation)
-syn match zencNumber /\v-?(\d+|\d+\.?\d+)([Ee]-?\d+)?/
+" decimal int literal
+syn match zencNumber /\v\c[1-9][0-9]*([iu]128|llu|ull|[iu](16|32|64)|ll|lu|ul|[iu]8|l|u)?/
 
-" hex literal
-syn match zencNumber /\v0[Xx][0-9A-Fa-f]+/
+" octal int literal
+syn match zencNumber /\v\c0[0-7]*([iu]128|llu|ull|[iu](16|32|64)|ll|lu|ul|[iu]8|l|u)?/
 
-" binary literal
-syn match zencNumber /\v0[Bb][01]+/
+" hex int literal
+syn match zencNumber /\v\c0x[0-9a-f]+([iu]128|llu|ull|[iu](16|32|64)|ll|lu|ul|[iu]8|l|u)?/
+
+" binary int literal
+syn match zencNumber /\v\c0b[01]+([iu]128|llu|ull|[iu](16|32|64)|ll|lu|ul|[iu]8|l|u)?/
+
+" decimal float literal (including scientific notation)
+syn match zencNumber /\v\c((\d+\.?\d*|\d*\.?\d+)e-?\d+|\d+\.\d*|\d*\.\d+)(f(32|64)|f|l)?/
+
+" hex float literal (including scientific notation)
+syn match zencNumber /\v\c0x([0-9a-f]+\.?[0-9a-f]*|[0-9a-f]*\.?[0-9a-f]+)p-?\d+(f(32|64)|f|l)?/
+
+" These matches prevent the periods in 0..10 from being highlighted as a float
+syn match zencNumber /\v\d+\ze\.\./
+syn match zencOperator /\v\.\./
 
 " This match exists solely to prevent identifiers with numbers in them from
 " being highlighted as numbers. This syntax group is intentionally not linked
