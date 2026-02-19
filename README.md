@@ -2,7 +2,7 @@
 
 This is a [Vim](https://www.vim.org/)/[Neovim](https://neovim.io/) plugin providing syntax highlighting and smart indentation for the [Zen C](https://github.com/z-libs/Zen-C) programming language.
 
-NOTE: This plugin should work fine for most Zen C code that you'll write/encounter, but there may still be unhandled edge cases. Please open an issue for any broken syntax highlighting or indentation that you encounter.
+NOTE: This plugin should work fine for most Zen C code that you'll encounter or write, but there may still be unhandled edge cases. Please open an issue for any broken syntax highlighting or indentation that you find.
 
 ### Installation
 
