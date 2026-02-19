@@ -99,12 +99,13 @@ function GetZencIndent()
     endif
 
     let prev_indent = s:IndentSmart(prev_lnum)
-    let prev_line = getline(prev_lnum)
 
     if s:InMultilineComment(prev_lnum)
         "continuation of multiline comment
         return prev_indent + 1
     endif
+
+    let prev_line = getline(prev_lnum)
 
     if prev_line =~ '\v.+\\$'
         "continuation of escaped newline
@@ -114,7 +115,7 @@ function GetZencIndent()
         return prev_indent
     endif
 
-    " skip over escaped blocks
+    " skip over macro lines and escaped blocks
     let prev_smart_lnum = s:PrevNonBlankSmart(prev_lnum)
     if prev_smart_lnum == 0
         return 0
@@ -123,7 +124,9 @@ function GetZencIndent()
     let prev_smart_indent = s:IndentSmart(prev_smart_lnum)
     let prev_smart_line = getline(prev_smart_lnum)
 
-    if prev_smart_line =~ '\v.*[{([]\s*(\/\/.*|\/\*.*\*\/\s*)?$'
+    " we have a negative lookbehind here to makes sure the previous line is
+    " not single-line commented
+    if prev_smart_line =~ '\v^.*(\/\/.*)@<![{([]\s*(\/\/.*|\/\*.*\*\/\s*)?$'
         if cur_line =~ '\v^\s*[})\]].*'
             " current line closes new block
             return prev_smart_indent
